@@ -1,50 +1,36 @@
-import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
-import icon from '../../assets/icon.svg';
-import './App.css';
+import SnippetList from 'screens/snippet-list';
+import {
+  MemoryRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
+import { ChakraProvider, extendTheme } from '@chakra-ui/react';
+import Snippet from 'screens/snippet';
+import SnippetDataProvider from 'data/snippets/context';
+import Layout from 'screens/_layout';
 
-function Hello() {
-  return (
-    <div>
-      <div className="Hello">
-        <img width="200" alt="icon" src={icon} />
-      </div>
-      <h1>electron-react-boilerplate</h1>
-      <div className="Hello">
-        <a
-          href="https://electron-react-boilerplate.js.org/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <button type="button">
-            <span role="img" aria-label="books">
-              📚
-            </span>
-            Read our docs
-          </button>
-        </a>
-        <a
-          href="https://github.com/sponsors/electron-react-boilerplate"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <button type="button">
-            <span role="img" aria-label="folded hands">
-              🙏
-            </span>
-            Donate
-          </button>
-        </a>
-      </div>
-    </div>
-  );
-}
+const theme = extendTheme({
+  config: {
+    useSystemColorMode: true,
+    initialColorMode: 'dark',
+  },
+});
 
 export default function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Hello />} />
-      </Routes>
-    </Router>
+    <ChakraProvider theme={theme}>
+      <SnippetDataProvider>
+        <Layout>
+          <Router>
+            <Routes>
+              <Route path="/snippet-list" Component={SnippetList} />
+              <Route path="/snippet" Component={Snippet} />
+              <Route path="/" element={<Navigate to="/snippet-list" />} />
+            </Routes>
+          </Router>
+        </Layout>
+      </SnippetDataProvider>
+    </ChakraProvider>
   );
 }

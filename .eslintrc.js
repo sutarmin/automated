@@ -13,6 +13,12 @@ module.exports = {
     '@typescript-eslint/no-shadow': 'error',
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': 'error',
+    'react/function-component-definition': 'off',
+    'import/prefer-default-export': 'off',
+    'react/no-children-prop': 'off',
+    'react/prop-types': 'off',
+    'react/jsx-props-no-spreading': 'off',
+    'promise/always-return': 'off',
   },
   parserOptions: {
     ecmaVersion: 2020,
